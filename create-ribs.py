@@ -51,13 +51,14 @@ def allpairs_shortest_path(nodes, edges):
 
     for u,v in edges:
         dist[u][v] = 1
+        nexthop[u][v] = v
 
     idx = 0
     N = len(nodes)
-    for i in nodes:
-        log("%7.2f%% done, computing shortest path for %s" % (idx*100.0/N, i))
-        for j in nodes:
-            for k in nodes:
+    for k in nodes:
+        log("%7.2f%% done, computing shortest path for %s" % (idx*100.0/N, k))
+        for i in nodes:
+            for j in nodes:
                 if dist[i][k] + dist[k][j] < dist[i][j]:
                     dist[i][j] = dist[i][k] + dist[k][j]
                     nexthop[i][j] = k
